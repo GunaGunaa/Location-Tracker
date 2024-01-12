@@ -6,14 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".LTSplashActivity">
 
+    <com.skyfishjy.library.RippleBackground
+        android:id="@+id/ripple_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rb_color="#145514"
+        app:rb_duration="4000"
+        app:rb_radius="90dp"
+        app:rb_rippleAmount="6"
+        app:rb_scale="4">
+
+
+
+    </com.skyfishjy.library.RippleBackground>
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_logo"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:src="@drawable/ic_logo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/ic_logo" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
