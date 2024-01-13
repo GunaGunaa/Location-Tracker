@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LTSplashActivity">
+    tools:context=".activity.LTSplashActivity">
 
     <com.skyfishjy.library.RippleBackground
         android:id="@+id/ripple_background"
@@ -15,8 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:rb_color="#145514"
-        app:rb_duration="4000"
+        app:rb_color="@color/PrimaryColor"
+        app:rb_duration="5000"
         app:rb_radius="90dp"
         app:rb_rippleAmount="6"
         app:rb_scale="4">

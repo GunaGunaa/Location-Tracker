@@ -1,6 +1,7 @@
-package com.example.locationtracker
+package com.example.locationtracker.activity
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,14 +11,14 @@ import com.example.locationtracker.databinding.LtActivitySplashBinding
 class LTSplashActivity : AppCompatActivity() {
     private lateinit var binding: LtActivitySplashBinding
     override fun onCreate(savedInstanceState: Bundle?) {
-        binding= LtActivitySplashBinding.inflate(layoutInflater)
+        binding = LtActivitySplashBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.rippleBackground.startRippleAnimation()
         Handler().postDelayed({
-
-
-            binding.rippleBackground.stopRippleAnimation()
-        },4000)
+            startActivity(Intent(this, LTAuthenticationActivity::class.java))
+            finish()
+//            binding.rippleBackground.stopRippleAnimation()
+        }, 4000)
     }
 }
