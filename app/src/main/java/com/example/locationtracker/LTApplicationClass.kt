@@ -5,6 +5,7 @@ package com.example.locationtracker
 import android.app.Application
 import android.content.Context
 import com.example.locationtracker.common.LTSharedPreferences
+import io.realm.Realm
 
 
 class LTApplicationClass : Application() {
@@ -12,7 +13,8 @@ class LTApplicationClass : Application() {
     override fun onCreate() {
         super.onCreate()
         sharedPreference = LTSharedPreferences(this)
-        appContext = applicationContext
+        appContext = this
+        Realm.init(this)
     }
 
     companion object {

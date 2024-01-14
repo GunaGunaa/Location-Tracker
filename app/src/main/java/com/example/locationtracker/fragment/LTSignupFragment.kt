@@ -5,24 +5,32 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import com.example.locationtracker.LTApplicationClass
 import com.example.locationtracker.R
 import com.example.locationtracker.databinding.LtFragmentSignupBinding
+import com.example.locationtracker.model.UserRealmModel
+import com.example.locationtracker.viewmodel.LTSignupViewModel
 
 
 class LTSignupFragment : Fragment() {
     private lateinit var binding: LtFragmentSignupBinding
+    private lateinit var viewModel: LTSignupViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding= LtFragmentSignupBinding.inflate(inflater,container,false)
+        binding = LtFragmentSignupBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel = ViewModelProvider(this)[LTSignupViewModel::class.java]
         binding.ivBack.setOnClickListener { parentFragmentManager.popBackStack() }
         binding.llLogin.setOnClickListener {
             parentFragmentManager.popBackStack()
@@ -36,7 +44,7 @@ class LTSignupFragment : Fragment() {
                 if (name.isEmpty()) {
                     etUserName.error = getString(R.string.please_enter_the_name)
                     etUserName.requestFocus()
-                }  else if (mail.isEmpty()) {
+                } else if (mail.isEmpty()) {
                     etMail.error = "Please enter the email id"
                     etMail.requestFocus()
                 } else if (!isValidEmail(mail)) {
@@ -56,11 +64,20 @@ class LTSignupFragment : Fragment() {
                     etConfirmPassword.requestFocus()
                 } else {
                     LTApplicationClass.sharedPreference.setFromLogin(true)
-//                    val otpBottomSheetFragment = OTPBottomSheetDialogFragment()
-//                    otpBottomSheetFragment.show(supportFragmentManager, otpBottomSheetFragment.tag)
+                    viewModel.saveUserDetails(UserRealmModel(name, mail, password))
                 }
             }
         }
+
+        viewModel.signupStatus.observe(viewLifecycleOwner, Observer {
+            if (it=="Success"){
+                Toast.makeText(requireContext(), "Successfully Registered", Toast.LENGTH_SHORT).show()
+            }
+            else if (it=="Fail")
+            {
+                Toast.makeText(requireContext(), "Already Registered Please Login", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun isValidIndianMobileNumber(number: String): Boolean {
@@ -81,4 +98,4 @@ class LTSignupFragment : Fragment() {
         val emailRegex = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
         return email.matches(emailRegex.toRegex())
     }
-    }
+}
