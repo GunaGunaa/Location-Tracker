@@ -5,7 +5,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import com.example.locationtracker.LTApplicationClass
 import com.example.locationtracker.databinding.LtActivitySplashBinding
+import io.realm.Realm
 
 @SuppressLint("CustomSplashScreen")
 class LTSplashActivity : AppCompatActivity() {
@@ -16,9 +18,14 @@ class LTSplashActivity : AppCompatActivity() {
         setContentView(binding.root)
         binding.rippleBackground.startRippleAnimation()
         Handler().postDelayed({
-            startActivity(Intent(this, LTAuthenticationActivity::class.java))
-            finish()
-//            binding.rippleBackground.stopRippleAnimation()
+            if (LTApplicationClass.sharedPreference.getLoginStatus()) {
+                startActivity(Intent(this, LTHomeActivity::class.java))
+                finish()
+            } else {
+                startActivity(Intent(this, LTAuthenticationActivity::class.java))
+                finish()
+            }
+
         }, 4000)
     }
 }

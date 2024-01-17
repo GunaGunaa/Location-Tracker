@@ -17,4 +17,7 @@
     <string name="please_enter_the_confirm_password">Please enter the confirm password</string>
     <string name="password_format_error">password should contain number,symbol and capital letter</string>
     <string name="please_enter_the_password">Please enter the password</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
+    <string name="yes">Yes\n</string>
 </resources>

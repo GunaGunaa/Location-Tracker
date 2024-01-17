@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.locationtracker.LTApplicationClass
 import com.example.locationtracker.R
+import com.example.locationtracker.common.AlertDialogHelper
 import com.example.locationtracker.databinding.LtFragmentSignupBinding
 import com.example.locationtracker.model.UserRealmModel
 import com.example.locationtracker.viewmodel.LTSignupViewModel
@@ -63,7 +64,6 @@ class LTSignupFragment : Fragment() {
                     etConfirmPassword.error = getString(R.string.password_should_be_match)
                     etConfirmPassword.requestFocus()
                 } else {
-                    LTApplicationClass.sharedPreference.setFromLogin(true)
                     viewModel.saveUserDetails(UserRealmModel(name, mail, password))
                 }
             }
@@ -71,11 +71,11 @@ class LTSignupFragment : Fragment() {
 
         viewModel.signupStatus.observe(viewLifecycleOwner, Observer {
             if (it=="Success"){
-                Toast.makeText(requireContext(), "Successfully Registered", Toast.LENGTH_SHORT).show()
+                AlertDialogHelper.showAlertDialog(requireContext(),"Successfully registered please login")
             }
             else if (it=="Fail")
             {
-                Toast.makeText(requireContext(), "Already Registered Please Login", Toast.LENGTH_SHORT).show()
+                AlertDialogHelper.showAlertDialog(requireContext(),"Account is already exist please login")
             }
         })
     }

@@ -9,20 +9,21 @@ class LTSharedPreferences(context: Context) {
     private val sharedPreferences: SharedPreferences
     private var loginStatus = "Login Status"
     private var fromLogin = "From Login"
-    private var fromVip = "from Vip"
+    private var gmail="gmail"
+    private var name="name"
 
     init {
         sharedPreferences = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
     }
 
-    fun saveString(key: String?, value: String?) {
+    fun setMail( value: String) {
         val editor = sharedPreferences.edit()
-        editor.putString(key, value)
+        editor.putString(gmail, value)
         editor.apply()
     }
 
-    fun getString(key: String?): String? {
-        return sharedPreferences.getString(key, "")
+    fun getMail(): String? {
+        return sharedPreferences.getString(gmail, "")
     }
 
     fun setLoginStatus(status: Boolean?) {
@@ -35,23 +36,16 @@ class LTSharedPreferences(context: Context) {
         return sharedPreferences.getBoolean(loginStatus, false)
     }
 
-    fun setFromLogin(status: Boolean?) {
+    fun setName(value:String){
         val editor = sharedPreferences.edit()
-        editor.putBoolean(fromLogin, status!!)
+        editor.putString(name, value)
         editor.apply()
     }
 
-    fun getFromLogin(): Boolean {
-        return sharedPreferences.getBoolean(fromLogin, false)
+    fun getName():String?{
+        return sharedPreferences.getString(name,"")
     }
 
-    fun setIsFromVip(status: Boolean) {
-        val editor = sharedPreferences.edit()
-        editor.putBoolean(fromVip, status)
-        editor.apply()
-    }
 
-    fun getIsFromVip(): Boolean {
-        return sharedPreferences.getBoolean(fromVip, false)
-    }
+
 }

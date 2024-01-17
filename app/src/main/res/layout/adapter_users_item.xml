@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="@dimen/spacing_10"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:padding="@dimen/spacing_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_user_image"
+            android:layout_width="@dimen/spacing_40"
+            android:layout_height="@dimen/spacing_40"
+            android:layout_marginStart="20dp"
+            app:cardCornerRadius="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+           app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/iv_account_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_account"
+            app:tint="@color/PrimaryColor" />
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user_name"
+            app:layout_constraintStart_toEndOf="@id/cv_user_image"
+            android:text="Guna"
+            android:textSize="16sp"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user_mail"
+            app:layout_constraintStart_toEndOf="@id/cv_user_image"
+            android:text="gunasekaran413003@gmail.com"
+            android:textSize="12sp"
+            android:layout_marginStart="20dp"
+            android:textColor="#aaa"
+            app:layout_constraintTop_toBottomOf="@id/tv_user_name"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

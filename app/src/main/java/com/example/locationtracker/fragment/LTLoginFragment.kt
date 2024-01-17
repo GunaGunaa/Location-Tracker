@@ -13,6 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.locationtracker.LTApplicationClass
 import com.example.locationtracker.R
+import com.example.locationtracker.activity.LTHomeActivity
+import com.example.locationtracker.common.AlertDialogHelper
+import com.example.locationtracker.common.LTSharedPreferences
 import com.example.locationtracker.databinding.LtFragmentLoginBinding
 import com.example.locationtracker.viewmodel.LTLoginViewModel
 import java.util.regex.Pattern
@@ -20,11 +23,12 @@ import java.util.regex.Pattern
 class LTLoginFragment : Fragment() {
     private lateinit var binding: LtFragmentLoginBinding
     private lateinit var viewModel: LTLoginViewModel
+    private var mail: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = LtFragmentLoginBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
         return binding.root
@@ -42,7 +46,7 @@ class LTLoginFragment : Fragment() {
 
         binding.tvLogin.setOnClickListener {
             binding.apply {
-                val mail = etMail.text.toString()
+                mail = etMail.text.toString()
                 val password = etPassword.text.toString()
                 if (mail.isEmpty()) {
                     etMail.error = "Please Enter the mail id"
@@ -58,21 +62,26 @@ class LTLoginFragment : Fragment() {
             }
         }
         viewModel.loginStatus.observe(viewLifecycleOwner, Observer {
-            if (it){
-                Toast.makeText(requireContext(), "Successfully logged in", Toast.LENGTH_SHORT).show()
-            }
-            else Toast.makeText(requireContext(), "Please check your mail and password", Toast.LENGTH_SHORT).show()
+            if (it) {
+                startActivity(Intent(requireContext(), LTHomeActivity::class.java))
+                LTApplicationClass.sharedPreference.setMail(mail)
+                requireActivity().finish()
+                LTApplicationClass.sharedPreference.setLoginStatus(true)
+            } else AlertDialogHelper.showAlertDialog(
+                requireContext(),
+                "please check the username or password"
+            )
         })
     }
 
 
-    private fun navigateActivity(activity: Activity) {
-        LTApplicationClass.sharedPreference.setLoginStatus(true)
-        startActivity(Intent(requireActivity(), activity::class.java))
-        requireActivity().finish()
-    }
+//    private fun navigateActivity(activity: Activity) {
+//        LTApplicationClass.sharedPreference.setLoginStatus(true)
+//        startActivity(Intent(requireActivity(), activity::class.java))
+//        requireActivity().finish()
+//    }
 
-    fun isValidEmail(email: String): Boolean {
+    private fun isValidEmail(email: String): Boolean {
         val emailRegex = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"
         return email.matches(emailRegex.toRegex())
     }
