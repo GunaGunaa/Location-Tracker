@@ -37,6 +37,7 @@ class LTLoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[LTLoginViewModel::class.java]
+
         binding.llTvSignup.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fl_authentication, LTSignupFragment())
