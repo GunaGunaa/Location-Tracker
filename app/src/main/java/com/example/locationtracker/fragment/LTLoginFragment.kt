@@ -40,8 +40,7 @@ class LTLoginFragment : Fragment() {
 
         binding.llTvSignup.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fl_authentication, LTSignupFragment())
-                .addToBackStack(null).commit()
+                .replace(R.id.fl_authentication, LTSignupFragment()).commit()
         }
 
 

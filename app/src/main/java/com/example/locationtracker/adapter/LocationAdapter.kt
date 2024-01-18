@@ -19,8 +19,12 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
-class LocationAdapter(private val locationDataList: ArrayList<LocationData>,private val listener: LocationTouchListener) :
+class LocationAdapter(
+    private val locationDataList: ArrayList<LocationData>,
+    private val listener: LocationTouchListener
+) :
     RecyclerView.Adapter<LocationAdapter.LocationViewHolder>() {
+
 
     class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val tvAddress: TextView = itemView.findViewById(R.id.tv_address)
@@ -37,12 +41,11 @@ class LocationAdapter(private val locationDataList: ArrayList<LocationData>,priv
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
         val locationData = locationDataList[position]
 
-
         // Set data to views
         holder.tvAddress.text = locationData.address
         holder.tvDateAndTime.text = locationData.timestamp
         holder.itemView.setOnClickListener {
-            listener.onLocationTouchClickListener(locationDataList,locationData)
+            listener.onLocationTouchClickListener(locationDataList, locationData)
         }
     }
 

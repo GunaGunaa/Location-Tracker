@@ -20,12 +20,10 @@ class LTSplashActivity : AppCompatActivity() {
         Handler().postDelayed({
             if (LTApplicationClass.sharedPreference.getLoginStatus()) {
                 startActivity(Intent(this, LTHomeActivity::class.java))
-                finish()
             } else {
                 startActivity(Intent(this, LTAuthenticationActivity::class.java))
-                finish()
             }
-
+            finish()
         }, 4000)
     }
 }

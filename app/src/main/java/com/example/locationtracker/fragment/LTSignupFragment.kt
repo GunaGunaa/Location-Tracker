@@ -32,9 +32,13 @@ class LTSignupFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this)[LTSignupViewModel::class.java]
-        binding.ivBack.setOnClickListener { parentFragmentManager.popBackStack() }
+        binding.ivBack.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fl_authentication, LTLoginFragment()).commit()
+        }
         binding.llLogin.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fl_authentication, LTLoginFragment()).commit()
         }
         binding.tvSignUp.setOnClickListener {
             binding.apply {
@@ -70,12 +74,16 @@ class LTSignupFragment : Fragment() {
         }
 
         viewModel.signupStatus.observe(viewLifecycleOwner, Observer {
-            if (it=="Success"){
-                AlertDialogHelper.showAlertDialog(requireContext(),"Successfully registered please login")
-            }
-            else if (it=="Fail")
-            {
-                AlertDialogHelper.showAlertDialog(requireContext(),"Account is already exist please login")
+            if (it == "Success") {
+                AlertDialogHelper.showAlertDialog(
+                    requireContext(),
+                    "Successfully registered please login"
+                )
+            } else if (it == "Fail") {
+                AlertDialogHelper.showAlertDialog(
+                    requireContext(),
+                    "Account is already exist please login"
+                )
             }
         })
     }
